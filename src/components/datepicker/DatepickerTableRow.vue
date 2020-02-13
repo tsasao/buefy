@@ -28,9 +28,16 @@
             <div
                 v-else
                 :key="index"
-                :class="classObject(day)"
+                :class="[classObject(day), {'has-event': eventsDateMatch(day)}, indicators]"
                 class="datepicker-cell">
                 {{ day.getDate() }}
+                <div class="events" v-if="eventsDateMatch(day)">
+                    <div
+                        class="event"
+                        :class="event.type"
+                        v-for="(event, index) in eventsDateMatch(day)"
+                        :key="index"/>
+                </div>
             </div>
         </template>
     </div>
